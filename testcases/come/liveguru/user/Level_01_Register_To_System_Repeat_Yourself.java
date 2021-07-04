@@ -13,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class User_01_Register_To_System {
+public class Level_01_Register_To_System_Repeat_Yourself {
 	WebDriver driver;
 	
 	By firstnameId = By.id("firstname");
