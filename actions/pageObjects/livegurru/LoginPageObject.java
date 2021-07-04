@@ -1,4 +1,4 @@
-package livegurru.pageObjects;
+package pageObjects.livegurru;
 
 public class LoginPageObject {
 	// chứa những actions của từng page
