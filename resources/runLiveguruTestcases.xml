@@ -3,7 +3,7 @@
   <test name="Run On Firefox">
     <classes>
       
-      <class name="come.liveguru.user.Level_02_Register_To_System_Common_Function"/>
+      <class name="come.liveguru.user.Level_03_Register_To_System_Page_Object"/>
     </classes>
   </test> 
 </suite> 
