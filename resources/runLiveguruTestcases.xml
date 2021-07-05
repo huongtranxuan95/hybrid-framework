@@ -4,6 +4,7 @@
     <classes>
       
       <class name="come.liveguru.user.Level_03_Register_To_System_Page_Object"/>
+      <class name="come.liveguru.user.Level_03_Address_Book_Page_Object"/>
     </classes>
   </test> 
 </suite> 

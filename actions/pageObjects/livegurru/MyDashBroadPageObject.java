@@ -26,5 +26,10 @@ public class MyDashBroadPageObject extends AbstractPage{
 		return isElementDisplayed(driver, ByLocator.XPATH, MyDashBroadPageUI.WELCOME_MSG_SUCCESSFUL_XPATH);
 	}
 
+	public void clickToAddressBookLink() {
+		waitElementVisible(driver, ByLocator.XPATH, MyDashBroadPageUI.ADDRESS_BOOK_LINK_XPATH);
+		clickToElement(driver, ByLocator.XPATH, MyDashBroadPageUI.ADDRESS_BOOK_LINK_XPATH);	
+	}
+
 	
 }
