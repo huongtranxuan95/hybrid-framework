@@ -3,7 +3,11 @@ package pageObjects.livegurru;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class MyDashBroadPageObject {
+import commons.AbstractPage;
+import commons.ByLocator;
+import pageUIs.liveguru.MyDashBroadPageUI;
+
+public class MyDashBroadPageObject extends AbstractPage{
 	WebDriver driver;
 	
 	public MyDashBroadPageObject(WebDriver driver) {
@@ -11,16 +15,15 @@ public class MyDashBroadPageObject {
 		this.driver = driver;
 	}
 
-	public boolean isMyDashbroadDisplayed(String string) {
-		// TODO Auto-generated method stub
+	public boolean isMyDashbroadDisplayed() {
+		//waitElementVisible(driver, ByLocator.ID, MyDashBroadPageUI.);
 		return false;
 	}
-	// chứa những actions của từng page
-	// 7 Sự kiện 
+	
 
-	public boolean isWelcomeMessageSuccessful(String string) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isWelcomeMessageSuccessful() {
+		waitElementVisible(driver, ByLocator.XPATH, MyDashBroadPageUI.WELCOME_MSG_SUCCESSFUL_XPATH);
+		return isElementDisplayed(driver, ByLocator.XPATH, MyDashBroadPageUI.WELCOME_MSG_SUCCESSFUL_XPATH);
 	}
 
 	

@@ -3,9 +3,11 @@ package pageObjects.livegurru;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import commons.AbstractPage;
 import commons.ByLocator;
+import pageUIs.liveguru.RegisterPageUI;
 
-public class RegisterPageObject {
+public class RegisterPageObject extends AbstractPage {
 	private WebDriver driver;
 	
 	public RegisterPageObject(WebDriver driver) {
@@ -14,74 +16,79 @@ public class RegisterPageObject {
 	}
 
 	public void clickToRegisterButton() {
-		// TODO Auto-generated method stub
-
+		waitElementClickable(driver, ByLocator.XPATH, RegisterPageUI.REGISTER_BUTTON_XPATH);
+		clickToElement(driver, ByLocator.XPATH, RegisterPageUI.REGISTER_BUTTON_XPATH);
 	}
 
 	public String getRequireErrorMessageAtFirstnameTextbox() {
-		// TODO Auto-generated method stub
-		return null;
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.REQUIRE_ERROR_MSG_FIRSTNAME_TEXTBOX_ID);	
+		return getElementText(driver, ByLocator.ID, RegisterPageUI.REQUIRE_ERROR_MSG_FIRSTNAME_TEXTBOX_ID);
 	}
 
 	public String getRequireErrorMessageAtLastnameTextbox() {
-		// TODO Auto-generated method stub
-		return null;
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.REQUIRE_ERROR_MSG_LASTNAME_TEXTBOX_ID);
+		return getElementText(driver, ByLocator.ID, RegisterPageUI.REQUIRE_ERROR_MSG_LASTNAME_TEXTBOX_ID);
 	}
 
 	public String getRequireErrorMessageAtEmailTextbox() {
-		// TODO Auto-generated method stub
-		return null;
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.REQUIRE_ERROR_MSG_EMAIL_TEXTBOX_ID);
+		return getElementText(driver, ByLocator.ID, RegisterPageUI.REQUIRE_ERROR_MSG_EMAIL_TEXTBOX_ID);
 	}
 
 	public String getRequireErrorMessageAtPasswordTextbox() {
-		// TODO Auto-generated method stub
-		return null;
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.REQUIRE_ERROR_MSG_PASSWORD_TEXTBOX_ID);	
+		return  getElementText(driver, ByLocator.ID, RegisterPageUI.REQUIRE_ERROR_MSG_PASSWORD_TEXTBOX_ID);
 	}
 
 	public String getRequireErrorMessageAtConfirmTextbox() {
-		// TODO Auto-generated method stub
-		return null;
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.REQUIRE_ERROR_MSG_CONFIRMATION_TEXTBOX_ID);
+		return getElementText(driver, ByLocator.ID, RegisterPageUI.REQUIRE_ERROR_MSG_CONFIRMATION_TEXTBOX_ID);
 	}
 
-	public void inputToEmailTextbox(String string) {
-		// TODO Auto-generated method stub
-
+	public void inputToEmailTextbox(String email) {
+		
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.EMAIL_TEXTBOX_ID);
+		sendKeysToElement(driver, ByLocator.ID, RegisterPageUI.EMAIL_TEXTBOX_ID, email);
 	}
 
 	public String getInvalidErrorMessageAtEmailTextbox() {
-		// TODO Auto-generated method stub
-		return null;
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.INVALID_ERROR_MSG_EMAIL_TEXTBOX_ID);
+		return getElementText(driver, ByLocator.ID, RegisterPageUI.INVALID_ERROR_MSG_EMAIL_TEXTBOX_ID);
 	}
 
 	public void inputToFirstnameTextbox(String firstName) {
-		// TODO Auto-generated method stub
+
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.FIRSTNAME_TEXTBOX_ID);
+		sendKeysToElement(driver, ByLocator.ID, RegisterPageUI.FIRSTNAME_TEXTBOX_ID, firstName);
 
 	}
 
 	public void inputToLastnameTextbox(String lastname) {
-		// TODO Auto-generated method stub
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.LASTNAME_TEXTBOX_ID);
+		sendKeysToElement(driver, ByLocator.ID, RegisterPageUI.LASTNAME_TEXTBOX_ID, lastname);
 
 	}
 
-	public void inputToPasswordTextbox(String string) {
-		// TODO Auto-generated method stub
+	public void inputToPasswordTextbox(String password) {
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.PASSWORD_ID);
+		sendKeysToElement(driver, ByLocator.ID, RegisterPageUI.PASSWORD_ID, password);
 
 	}
 
-	public void inputToConfirmPassTextbox(String string) {
-		// TODO Auto-generated method stub
-
+	public void inputToConfirmPassTextbox(String cPassword) {
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.CONFIRMATION_ID);
+		sendKeysToElement(driver, ByLocator.ID, RegisterPageUI.CONFIRMATION_ID, cPassword);
 	}
 
 
 	public String getInvalidErrorMessageAtPasswordTextbox() {
-		// TODO Auto-generated method stub
-		return null;
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.INVALID_ERROR_MSG_PASSWORD_TEXTBOX_ID);
+		return getElementText(driver, ByLocator.ID, RegisterPageUI.INVALID_ERROR_MSG_PASSWORD_TEXTBOX_ID);
 	}
 
 	public String getInvalidErrorMessageAtConfirmTextbox() {
-		// TODO Auto-generated method stub
-		return null;
+		waitElementVisible(driver, ByLocator.ID, RegisterPageUI.INVALID_ERROR_MSG_CONFIMATION_TEXTBOX_ID);
+		return getElementText(driver, ByLocator.ID, RegisterPageUI.INVALID_ERROR_MSG_CONFIMATION_TEXTBOX_ID);
 	}
 
 }

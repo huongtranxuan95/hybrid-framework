@@ -56,8 +56,6 @@ public class Level_03_Register_To_System_Page_Object extends AbstractPage {
 
 		loginPage = new LoginPageObject(driver);
 		loginPage.clickToCreatAnAccountButton();
-		clickToElement(driver,ByLocator.XPATH, "//span[contains(text(),'Create an Account')]");
-
 		registerPage = new RegisterPageObject(driver);
 		sleepSeconds(1);
 
@@ -132,8 +130,8 @@ public class Level_03_Register_To_System_Page_Object extends AbstractPage {
 		registerPage.clickToRegisterButton();
 		
 		mydashbroadPage = new MyDashBroadPageObject(driver);
-		Assert.assertTrue(mydashbroadPage.isMyDashbroadDisplayed("//h1[contains(text(),'My Dashboard')]"));
-		Assert.assertTrue(mydashbroadPage.isWelcomeMessageSuccessful("//span[contains(text(),'Thank you for registering with Main Website Store.')]"));
+		//Assert.assertTrue(mydashbroadPage.isMyDashbroadDisplayed());
+		Assert.assertTrue(mydashbroadPage.isWelcomeMessageSuccessful());
 
 	}
 
