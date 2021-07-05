@@ -46,9 +46,9 @@ public class Level_02_Register_To_System_Common_Function extends AbstractPage{
 	}
 	@BeforeMethod
 	public void beforeMethod() {
-		clickToElement(driver, locatorElement(ByLocator.XPATH, "//div[@class='footer']//a[text()='My Account']"));
+		clickToElement(driver, ByLocator.XPATH, "//div[@class='footer']//a[text()='My Account']");
 		sleepSeconds(1);
-		clickToElement(driver, locatorElement(ByLocator.XPATH, "//span[contains(text(),'Create an Account')]"));
+		clickToElement(driver, ByLocator.XPATH, "//span[contains(text(),'Create an Account')]");
 		sleepSeconds(1);
 		
 	}
@@ -57,70 +57,70 @@ public class Level_02_Register_To_System_Common_Function extends AbstractPage{
 	public void Register_01_Empty_Data() {
 
 		//sleepSeconds(1);
-		clickToElement(driver, locatorElement(ByLocator.XPATH, "//button[@title='Register']"));
+		clickToElement(driver,ByLocator.XPATH, "//button[@title='Register']");
 		sleepSeconds(1);
 		
-		Assert.assertEquals(getElementText(driver, locatorElement(ByLocator.XPATH, "//div[@id='advice-required-entry-firstname']")), "This is a required field.");
-		Assert.assertEquals(getElementText(driver, locatorElement(ByLocator.XPATH, "//div[@id='advice-required-entry-lastname']")), "This is a required field.");
-		Assert.assertEquals(getElementText(driver, locatorElement(ByLocator.XPATH, "//div[@id='advice-required-entry-email_address']")), "This is a required field.");
-		Assert.assertEquals(getElementText(driver, locatorElement(ByLocator.XPATH, "//div[@id='advice-required-entry-password']")), "This is a required field.");
-		Assert.assertEquals(getElementText(driver, locatorElement(ByLocator.XPATH, "//div[@id='advice-required-entry-confirmation']")), "This is a required field.");
+		Assert.assertEquals(getElementText(driver, ByLocator.XPATH, "//div[@id='advice-required-entry-firstname']"), "This is a required field.");
+		Assert.assertEquals(getElementText(driver, ByLocator.XPATH, "//div[@id='advice-required-entry-lastname']"), "This is a required field.");
+		Assert.assertEquals(getElementText(driver, ByLocator.XPATH, "//div[@id='advice-required-entry-email_address']"), "This is a required field.");
+		Assert.assertEquals(getElementText(driver, ByLocator.XPATH, "//div[@id='advice-required-entry-password']"), "This is a required field.");
+		Assert.assertEquals(getElementText(driver, ByLocator.XPATH, "//div[@id='advice-required-entry-confirmation']"), "This is a required field.");
 		
 		
 	}
 
 	@Test
 	public void Register_02_Invalid_Email() {
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "firstname"), firstName);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "lastname"), lastname);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "email_address"), "namnguyen@123.123");
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "password"), password);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "confirmation"), password);
-		clickToElement(driver, locatorElement(ByLocator.XPATH, "//button[@title='Register']"));
+		sendKeysToElement(driver, ByLocator.ID, "firstname", firstName);
+		sendKeysToElement(driver, ByLocator.ID, "lastname", lastname);
+		sendKeysToElement(driver, ByLocator.ID, "email_address", "namnguyen@123.123");
+		sendKeysToElement(driver, ByLocator.ID, "password", password);
+		sendKeysToElement(driver, ByLocator.ID, "confirmation", password);
+		clickToElement(driver, ByLocator.XPATH, "//button[@title='Register']");
 		
-		Assert.assertEquals(getElementText(driver, locatorElement(ByLocator.XPATH, "//div[@id='advice-validate-email-email_address']")), "Please enter a valid email address. For example johndoe@domain.com.");
+		Assert.assertEquals(getElementText(driver, ByLocator.XPATH, "//div[@id='advice-validate-email-email_address']"), "Please enter a valid email address. For example johndoe@domain.com.");
 	}
 
 	@Test
 	public void Register_03_Password_Less_Than_Six_Character() {
 
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "firstname"), firstName);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "lastname"), lastname);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "email_address"), email);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "password"), "123");
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "confirmation"), "123");
-		clickToElement(driver, locatorElement(ByLocator.XPATH, "//button[@title='Register']"));
+		sendKeysToElement(driver, ByLocator.ID, "firstname", firstName);
+		sendKeysToElement(driver, ByLocator.ID, "lastname", lastname);
+		sendKeysToElement(driver, ByLocator.ID, "email_address", email);
+		sendKeysToElement(driver, ByLocator.ID, "password", "123");
+		sendKeysToElement(driver, ByLocator.ID, "confirmation", "123");
+		clickToElement(driver, ByLocator.XPATH, "//button[@title='Register']");
 		
-		Assert.assertEquals(getElementText(driver, locatorElement(ByLocator.XPATH, "//div[@id='advice-validate-password-password']")), "Please enter 6 or more characters without leading or trailing spaces.");
+		Assert.assertEquals(getElementText(driver, ByLocator.XPATH, "//div[@id='advice-validate-password-password']"), "Please enter 6 or more characters without leading or trailing spaces.");
 	}
 
 	@Test
 	public void Register_04_ConfirmPassword_Not_Matching_Password() {
 
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "firstname"), firstName);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "lastname"), lastname);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "email_address"), email);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "password"), password);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "confirmation"), "123123");
-		clickToElement(driver, locatorElement(ByLocator.XPATH, "//button[@title='Register']"));
+		sendKeysToElement(driver, ByLocator.ID, "firstname", firstName);
+		sendKeysToElement(driver, ByLocator.ID, "lastname", lastname);
+		sendKeysToElement(driver, ByLocator.ID, "email_address", email);
+		sendKeysToElement(driver, ByLocator.ID, "password", password);
+		sendKeysToElement(driver, ByLocator.ID, "confirmation", "123123");
+		clickToElement(driver, ByLocator.XPATH, "//button[@title='Register']");
 		
-		Assert.assertEquals(getElementText(driver, locatorElement(ByLocator.XPATH, "//div[@id='advice-validate-cpassword-confirmation']")), "Please make sure your passwords match.");
+		Assert.assertEquals(getElementText(driver, ByLocator.XPATH, "//div[@id='advice-validate-cpassword-confirmation']"), "Please make sure your passwords match.");
 		
 	}
 
 	@Test
 	public void Register_05_Valid() {
 
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "firstname"), firstName);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "lastname"), lastname);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "email_address"), email);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "password"), password);
-		sendKeysToElement(driver, locatorElement(ByLocator.ID, "confirmation"), password);
-		clickToElement(driver, locatorElement(ByLocator.XPATH, "//button[@title='Register']"));
+		sendKeysToElement(driver, ByLocator.ID, "firstname", firstName);
+		sendKeysToElement(driver, ByLocator.ID, "lastname", lastname);
+		sendKeysToElement(driver, ByLocator.ID, "email_address", email);
+		sendKeysToElement(driver, ByLocator.ID, "password", password);
+		sendKeysToElement(driver, ByLocator.ID, "confirmation", password);
+		clickToElement(driver, ByLocator.XPATH, "//button[@title='Register']");
 		sleepSeconds(1);
 		
-		Assert.assertTrue(isElementDisplayed(driver, locatorElement(ByLocator.XPATH, "//h1[contains(text(),'My Dashboard')]")));
-		Assert.assertTrue(isElementDisplayed(driver, locatorElement(ByLocator.XPATH, "//span[contains(text(),'Thank you for registering with Main Website Store.')]")));
+		Assert.assertTrue(isElementDisplayed(driver, ByLocator.XPATH, "//h1[contains(text(),'My Dashboard')]"));
+		Assert.assertTrue(isElementDisplayed(driver, ByLocator.XPATH, "//span[contains(text(),'Thank you for registering with Main Website Store.')]"));
 	}
 
 	public int randomInt() {

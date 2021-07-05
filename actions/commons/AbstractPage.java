@@ -36,6 +36,7 @@ public abstract class AbstractPage {
 	public void setImplicitWait(WebDriver driver, long timeout) {
 		driver.manage().timeouts().implicitlyWait(longTimeout, TimeUnit.SECONDS);
 	}
+
 	public String getPageTitle(WebDriver driver) {
 		return driver.getTitle();
 	}
@@ -121,48 +122,47 @@ public abstract class AbstractPage {
 
 	// WebElement
 
-	public WebElement find(WebDriver driver, By locator) {
-		return driver.findElement(locator);
+	public WebElement find(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		return driver.findElement(locatorElement(locatorType, locatorPath));
 	}
 
-	public List<WebElement> finds(WebDriver driver, By locator) {
-		return driver.findElements(locator);
+	public List<WebElement> finds(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		return driver.findElements(locatorElement(locatorType, locatorPath));
 	}
 
-	public void clickToElement(WebDriver driver, By locator) {
-		find(driver, locator).click();
+	public void clickToElement(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		find(driver, locatorType, locatorPath).click();
 	}
 
-	public void sendKeysToElement(WebDriver driver, By locator, String text) {
-		element = find(driver, locator);
+	public void sendKeysToElement(WebDriver driver, ByLocator locatorType, String locatorPath, String text) {
+		element = find(driver, locatorType, locatorPath);
 		element.clear();
 		element.sendKeys(text);
 	}
 
-	public void selectItemInDropdown(WebDriver driver, By locator, String itemValue) {
-		select = new Select(find(driver, locator));
+	public void selectItemInDropdown(WebDriver driver, ByLocator locatorType, String locatorPath, String itemValue) {
+		select = new Select(find(driver, locatorType, locatorPath));
 		select.selectByVisibleText(itemValue);
 	}
 
-	public String getSelectedItemInDropdown(WebDriver driver, By locator) {
-		select = new Select(find(driver, locator));
+	public String getSelectedItemInDropdown(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		select = new Select(find(driver, locatorType, locatorPath));
 		return select.getFirstSelectedOption().getText();
 	}
 
-	public boolean isDropdownMutiple(WebDriver driver, By locator) {
-		select = new Select(find(driver, locator));
+	public boolean isDropdownMutiple(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		select = new Select(find(driver, locatorType, locatorPath));
 		return select.isMultiple();
 
 	}
 
-	public void selectItemInCustomDropdownList(WebDriver driver, By parentLocator, By childLocator,
-			String itemValue) {
-		clickToElement(driver, parentLocator);
+	public void selectItemInCustomDropdownList(WebDriver driver, String parentLocator,ByLocator parentLocatorType, String childLocator,ByLocator childLocatorType, String itemValue) {
+		clickToElement(driver,parentLocatorType ,parentLocator);
 		sleepSeconds(1);
 		explicitWait = new WebDriverWait(driver, longTimeout);
 
-		explicitWait.until(ExpectedConditions.presenceOfElementLocated(childLocator));
-		itemList = finds(driver, childLocator);
+		explicitWait.until(ExpectedConditions.presenceOfElementLocated(locatorElement(childLocatorType, childLocator)));
+		itemList = finds(driver,childLocatorType ,childLocator);
 		for (WebElement webElement : itemList) {
 			if (webElement.getText().equals(itemValue)) {
 				js = (JavascriptExecutor) driver;
@@ -175,48 +175,48 @@ public abstract class AbstractPage {
 
 	}
 
-	public String getElementAttribute(WebDriver driver, By locator, String attributeName) {
-		return find(driver, locator).getAttribute(attributeName);
+	public String getElementAttribute(WebDriver driver, ByLocator locatorType, String locatorPath, String attributeName) {
+		return find(driver, locatorType, locatorPath).getAttribute(attributeName);
 	}
 
-	public String getElementText(WebDriver driver, By locator) {
-		return find(driver, locator).getText();
+	public String getElementText(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		return find(driver, locatorType, locatorPath).getText();
 	}
 
-	public int countElementNumber(WebDriver driver, By locator) {
-		return finds(driver, locator).size();
+	public int countElementNumber(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		return finds(driver,locatorType ,locatorPath).size();
 	}
 
-	public boolean isElementDisplayed(WebDriver driver, By locator) {
-		return find(driver, locator).isDisplayed();
+	public boolean isElementDisplayed(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		return find(driver, locatorType, locatorPath).isDisplayed();
 	}
 
-	public boolean isElementEnabled(WebDriver driver, By locator) {
-		return find(driver, locator).isEnabled();
+	public boolean isElementEnabled(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		return find(driver, locatorType, locatorPath).isEnabled();
 	}
 
-	public boolean isElementSelected(WebDriver driver, By locator) {
-		return find(driver, locator).isSelected();
+	public boolean isElementSelected(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		return find(driver, locatorType, locatorPath).isSelected();
 	}
 
-	public void checkToCheckbox(WebDriver driver, By locator) {
-		element = find(driver, locator);
+	public void checkToCheckbox(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		element = find(driver, locatorType, locatorPath);
 		if (!element.isSelected()) {
 			element.click();
 		}
 	}
 
-	public void switchToFrameOrIframe(WebDriver driver, By locator) {
-		driver.switchTo().frame(find(driver, locator));
+	public void switchToFrameOrIframe(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		driver.switchTo().frame(find(driver, locatorType, locatorPath));
 	}
 
 	public void switchToDefaultContent(WebDriver driver) {
 		driver.switchTo().defaultContent();
 	}
 
-	public void hoverToElement(WebDriver driver, By locator) {
+	public void hoverToElement(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		action = new Actions(driver);
-		action.moveToElement(find(driver, locator)).perform();
+		action.moveToElement(find(driver, locatorType, locatorPath)).perform();
 	}
 
 	public void clickAndHoldToRandomElement(WebDriver driver, By locator, List<WebElement> itemList) {
@@ -224,24 +224,24 @@ public abstract class AbstractPage {
 		// action.clickAndHold();
 	}
 
-	public void doubleClickToElement(WebDriver driver, By locator) {
+	public void doubleClickToElement(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		action = new Actions(driver);
-		action.doubleClick(find(driver, locator));
+		action.doubleClick(find(driver, locatorType, locatorPath));
 	}
 
-	public void rightClickToElement(WebDriver driver, By locator) {
+	public void rightClickToElement(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		action = new Actions(driver);
-		action.contextClick(find(driver, locator));
+		action.contextClick(find(driver, locatorType, locatorPath));
 	}
 
-	public void sendKeyBroadToElement(WebDriver driver, By locator, Keys key) {
+	public void sendKeyBroadToElement(WebDriver driver, ByLocator locatorType, String locatorPath, Keys key) {
 		action = new Actions(driver);
-		action.sendKeys(find(driver, locator), key);
+		action.sendKeys(find(driver, locatorType, locatorPath), key);
 	}
 
-	public void dragAndDropHTML4(WebDriver driver, By dragLocator, By dropLocation) {
+	public void dragAndDropHTML4(WebDriver driver,ByLocator dragLocatorType ,String dragLocator, String dropLocation, ByLocator dropLocatorType) {
 		action = new Actions(driver);
-		action.dragAndDrop(find(driver, dragLocator), find(driver, dropLocation));
+		action.dragAndDrop(find(driver,dragLocatorType ,dragLocator), find(driver,dropLocatorType ,dropLocation));
 
 	}
 
@@ -274,8 +274,8 @@ public abstract class AbstractPage {
 		js.executeScript("window.location = '" + url + "'");
 	}
 
-	public void highlightElement(WebDriver driver, By locator) {
-		element = find(driver, locator);
+	public void highlightElement(WebDriver driver, ByLocator locatorType, String locatorPath) {
+		element = find(driver, locatorType, locatorPath);
 		js = (JavascriptExecutor) driver;
 		String originalStyle = element.getAttribute("style");
 		js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style",
@@ -284,36 +284,36 @@ public abstract class AbstractPage {
 		js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style", originalStyle);
 	}
 
-	public void clickToElementByJS(WebDriver driver, By locator) {
+	public void clickToElementByJS(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click();", find(driver, locator));
+		js.executeScript("arguments[0].click();", find(driver, locatorType, locatorPath));
 	}
 
-	public void scrollToElement(WebDriver driver, By locator) {
+	public void scrollToElement(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView(true);", find(driver, locator));
+		js.executeScript("arguments[0].scrollIntoView(true);", find(driver, locatorType, locatorPath));
 	}
 
-	public void sendkeyToElementByJS(WebDriver driver, By locator, String value) {
+	public void sendkeyToElementByJS(WebDriver driver,  ByLocator locatorType, String locatorPath, String value) {
 		js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].setAttribute('value', '" + value + "')", find(driver, locator));
+		js.executeScript("arguments[0].setAttribute('value', '" + value + "')", find(driver, locatorType, locatorPath));
 	}
 
-	public void removeAttributeInDOM(WebDriver driver, By locator, String attributeRemove) {
+	public void removeAttributeInDOM(WebDriver driver,  ByLocator locatorType, String locatorPath, String attributeRemove) {
 		js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].removeAttribute('" + attributeRemove + "');", find(driver, locator));
+		js.executeScript("arguments[0].removeAttribute('" + attributeRemove + "');", find(driver, locatorType, locatorPath));
 	}
 
-	public String getElementValidationMessage(WebDriver driver, By locator) {
+	public String getElementValidationMessage(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		js = (JavascriptExecutor) driver;
-		return (String) js.executeScript("return arguments[0].validationMessage;", find(driver, locator));
+		return (String) js.executeScript("return arguments[0].validationMessage;", find(driver, locatorType, locatorPath));
 	}
 
-	public boolean isImageLoaded(WebDriver driver, By locator) {
+	public boolean isImageLoaded(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		js = (JavascriptExecutor) driver;
 		boolean status = (boolean) js.executeScript(
 				"return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",
-				find(driver, locator));
+				find(driver, locatorType, locatorPath));
 		if (status) {
 			return true;
 		} else {
@@ -321,30 +321,30 @@ public abstract class AbstractPage {
 		}
 	}
 
-	public void removeDisableAttributeOfElementByJS(WebDriver driver, By locator) {
+	public void removeDisableAttributeOfElementByJS(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		js = (JavascriptExecutor) driver;
-		element = find(driver, locator);
+		element = find(driver, locatorType, locatorPath);
 		js.executeScript("arguments[0].removeAttribute('disabled')", element);
 	}
 
-	public void waitElementVisible(WebDriver driver, By locator) {
+	public void waitElementVisible(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		explicitWait = new WebDriverWait(driver, longTimeout);
-		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(locatorElement(locatorType, locatorPath)));
 	}
 
-	public void waitElementInVisible(WebDriver driver, By locator) {
+	public void waitElementInVisible(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		explicitWait = new WebDriverWait(driver, longTimeout);
-		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(locatorElement(locatorType, locatorPath)));
 	}
 
-	public void waitElementPresence(WebDriver driver, By locator) {
+	public void waitElementPresence(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		explicitWait = new WebDriverWait(driver, longTimeout);
-		explicitWait.until(ExpectedConditions.presenceOfElementLocated(locator));
+		explicitWait.until(ExpectedConditions.presenceOfElementLocated(locatorElement(locatorType, locatorPath)));
 	}
 
-	public void waitElementClickable(WebDriver driver, By locator) {
+	public void waitElementClickable(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		explicitWait = new WebDriverWait(driver, longTimeout);
-		explicitWait.until(ExpectedConditions.elementToBeClickable(locator));
+		explicitWait.until(ExpectedConditions.elementToBeClickable(locatorElement(locatorType, locatorPath)));
 	}
 
 	public void waitAlertPresence(WebDriver driver) {
@@ -367,19 +367,19 @@ public abstract class AbstractPage {
 		By locator = null;
 		switch (locatorType) {
 		case ID:
-			locator= By.id(locatorPath);
+			locator = By.id(locatorPath);
 			break;
 		case CLASS:
-			locator= By.className(locatorPath);
+			locator = By.className(locatorPath);
 			break;
 		case NAME:
-			locator= By.name(locatorPath);
+			locator = By.name(locatorPath);
 			break;
 		case CSSLOCATOR:
-			locator= By.cssSelector(locatorPath);
+			locator = By.cssSelector(locatorPath);
 			break;
 		case XPATH:
-			locator= By.xpath(locatorPath);
+			locator = By.xpath(locatorPath);
 			break;
 		default:
 			System.out.println("Need input type locator");

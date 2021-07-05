@@ -7,10 +7,20 @@ import commons.ByLocator;
 import pageUIs.liveguru.HomePageUI;
 
 public class HomePageObject extends AbstractPage{
-	WebDriver driver;
+	private WebDriver driver;
+	
+	public HomePageObject(WebDriver driver) {
+		super();
+		this.driver = driver;
+	}
+	public HomePageObject(WebDriver driver, WebDriver implicitWait) {
+		super();
+		this.driver = driver;
+	}
+
 	public void clickToMyAccountLink() {
-		// TODO Auto-generated method stub
-		clickToElement(driver,locatorElement(ByLocator.XPATH, HomePageUI.MY_ACCOUNT_LINK_XPATH));
+		waitElementClickable(driver, ByLocator.XPATH, HomePageUI.MY_ACCOUNT_LINK_XPATH);
+		clickToElement(driver,ByLocator.XPATH, HomePageUI.MY_ACCOUNT_LINK_XPATH);
 	}
 	// chứa những actions của từng page
 	// 7 Sự kiện 

@@ -44,21 +44,21 @@ public class Level_03_Register_To_System_Page_Object extends AbstractPage {
 		password = "123456";
 		confirmPass = password;
 
-		homePage = new HomePageObject();
+		homePage = new HomePageObject(driver);
 
 	}
 
 	@BeforeMethod
 	public void beforeMethod() {
 		homePage.clickToMyAccountLink();
-		clickToElement(driver, locatorElement(ByLocator.XPATH, "//div[@class='footer']//a[text()='My Account']"));
+		clickToElement(driver,ByLocator.XPATH, "//div[@class='footer']//a[text()='My Account']");
 		sleepSeconds(1);
 
-		loginPage = new LoginPageObject();
+		loginPage = new LoginPageObject(driver);
 		loginPage.clickToCreatAnAccountButton();
-		clickToElement(driver, locatorElement(ByLocator.XPATH, "//span[contains(text(),'Create an Account')]"));
+		clickToElement(driver,ByLocator.XPATH, "//span[contains(text(),'Create an Account')]");
 
-		registerPage = new RegisterPageObject();
+		registerPage = new RegisterPageObject(driver);
 		sleepSeconds(1);
 
 	}
@@ -68,8 +68,7 @@ public class Level_03_Register_To_System_Page_Object extends AbstractPage {
 
 		// sleepSeconds(1);
 		registerPage.clickToRegisterButton();
-		clickToElement(driver, locatorElement(ByLocator.XPATH, "//button[@title='Register']"));
-		sleepSeconds(1);
+		clickToElement(driver, ByLocator.XPATH, "//button[@title='Register']");sleepSeconds(1);
 
 		Assert.assertEquals(registerPage.getRequireErrorMessageAtFirstnameTextbox(), "This is a required field.");
 		Assert.assertEquals(registerPage.getRequireErrorMessageAtLastnameTextbox(), "This is a required field.");
@@ -99,8 +98,7 @@ public class Level_03_Register_To_System_Page_Object extends AbstractPage {
 		registerPage.clickToRegisterButton();
 
 		Assert.assertEquals(
-				registerPage.getInvalidErrorMessageAtPasswordTextbox(
-						locatorElement(ByLocator.XPATH, "//div[@id='advice-validate-password-password']")),
+				registerPage.getInvalidErrorMessageAtPasswordTextbox(),
 				"Please enter 6 or more characters without leading or trailing spaces.");
 		// Assert.assertEquals(getElementText(driver, locatorElement("XPATH",
 		// "//div[@id='advice-validate-password-password']")), "Please enter 6 or more
@@ -118,7 +116,7 @@ public class Level_03_Register_To_System_Page_Object extends AbstractPage {
 		registerPage.clickToRegisterButton();
 
 		
-		Assert.assertEquals(registerPage.getInvalidErrorMessageAtConfirmTextbox(locatorElement(ByLocator.XPATH, "//div[@id='advice-validate-cpassword-confirmation']")), "Please make sure your passwords match.");
+		Assert.assertEquals(registerPage.getInvalidErrorMessageAtConfirmTextbox(), "Please make sure your passwords match.");
 		
 		
 	}
@@ -133,7 +131,7 @@ public class Level_03_Register_To_System_Page_Object extends AbstractPage {
 		registerPage.inputToConfirmPassTextbox(password);
 		registerPage.clickToRegisterButton();
 		
-		mydashbroadPage = new MyDashBroadPageObject();
+		mydashbroadPage = new MyDashBroadPageObject(driver);
 		Assert.assertTrue(mydashbroadPage.isMyDashbroadDisplayed("//h1[contains(text(),'My Dashboard')]"));
 		Assert.assertTrue(mydashbroadPage.isWelcomeMessageSuccessful("//span[contains(text(),'Thank you for registering with Main Website Store.')]"));
 
