@@ -363,17 +363,28 @@ public abstract class AbstractPage {
 
 	// type locator: id, class, name, css, xpath
 
-	public By locatorElement(String namePath, String locatorPath) {
-		if (namePath.contains("ID")) {
-			return By.id(locatorPath);
-		} else if (namePath.contains("CLASS")) {
-			return By.className(locatorPath);
-		} else if (namePath.contains("NAMEP")) {
-			return By.className(locatorPath);
-		} else if (namePath.contains("CSS")) {
-			return By.cssSelector(locatorPath);
-		} else {
-			return By.xpath(locatorPath);
+	public By locatorElement(ByLocator locatorType, String locatorPath) {
+		By locator = null;
+		switch (locatorType) {
+		case ID:
+			locator= By.id(locatorPath);
+			break;
+		case CLASS:
+			locator= By.className(locatorPath);
+			break;
+		case NAME:
+			locator= By.name(locatorPath);
+			break;
+		case CSSLOCATOR:
+			locator= By.cssSelector(locatorPath);
+			break;
+		case XPATH:
+			locator= By.xpath(locatorPath);
+			break;
+		default:
+			System.out.println("Need input type locator");
+			break;
 		}
+		return locator;
 	}
 }
