@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="LiveGuru" parallel="false">
+  
   <test name="Run On Firefox">
-    <classes>
-      
-      <class name="come.liveguru.user.Level_03_Register_To_System_Page_Object"/>
-      <class name="come.liveguru.user.Level_03_Address_Book_Page_Object"/>
-    </classes>
+  <parameter name="browser" value="firefox"/>
+	    <classes>
+	      <class name="come.liveguru.user.Level_04_Address_Book_Mutiple_Browser"/>
+	    </classes>
   </test> 
+  
+    <test name="Run On Chrome">
+    <parameter name="browser" value="chrome"/>
+	    <classes>
+	      <class name="come.liveguru.user.Level_04_Address_Book_Mutiple_Browser"/>
+	    </classes>
+  	</test>
+  
+    <test name="Run On Edge">
+    <parameter name="browser" value="edge" />
+	    <classes>
+	      <class name="come.liveguru.user.Level_04_Address_Book_Mutiple_Browser"/>
+	    </classes>
+  	</test>
 </suite> 
