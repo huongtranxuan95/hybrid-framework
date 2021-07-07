@@ -49,8 +49,8 @@ public class Level_04_Address_Book_Mutiple_Browser extends AbstractTest {
 //		
 //		 System.setProperty("webdriver.edge.driver",".\\browserDrivers\\msedgedriver.exe");
 //		 driver= new EdgeDriver();
-		driver = getDriverBroswer(browserName);
-		driver.get("http://live.demoguru99.com/");
+		String url = "http://live.demoguru99.com/";
+		driver = getDriverBroswer(browserName, url);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		firstName = "name";

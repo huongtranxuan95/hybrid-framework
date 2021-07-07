@@ -51,7 +51,7 @@ public class Level_03_Register_To_System_Page_Object extends AbstractPage {
 	@BeforeMethod
 	public void beforeMethod() {
 		homePage.clickToMyAccountLink();
-		clickToElement(driver,ByLocator.XPATH, "//div[@class='footer']//a[text()='My Account']");
+		
 		sleepSeconds(1);
 
 		loginPage = new LoginPageObject(driver);
@@ -66,7 +66,6 @@ public class Level_03_Register_To_System_Page_Object extends AbstractPage {
 
 		// sleepSeconds(1);
 		registerPage.clickToRegisterButton();
-		clickToElement(driver, ByLocator.XPATH, "//button[@title='Register']");sleepSeconds(1);
 
 		Assert.assertEquals(registerPage.getRequireErrorMessageAtFirstnameTextbox(), "This is a required field.");
 		Assert.assertEquals(registerPage.getRequireErrorMessageAtLastnameTextbox(), "This is a required field.");
