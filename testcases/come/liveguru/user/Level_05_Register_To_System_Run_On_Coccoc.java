@@ -32,14 +32,11 @@ public class Level_05_Register_To_System_Run_On_Coccoc extends AbstractTest {
 
 	String firstName = "", lastname = "", email = "", password = "", confirmPass = "";
 
-	@Parameters({"browser" , "url", "urlTargetCoccoc"})
+	@Parameters({"browser" , "url"})
 	@BeforeClass
-	public void beforeClass(String browserName, String appUrl, String urlTargetCoccoc) {
-//		System.setProperty("webdriver.gecko.driver", ".\\browserDrivers\\geckodriver.exe");
-//		driver = new FirefoxDriver();
-		System.out.println("appUrl: "+appUrl);
-		System.out.println("urlTargetCoccoc: "+urlTargetCoccoc);
-		driver = getDriverBroswer(browserName, appUrl,urlTargetCoccoc);
+	public void beforeClass(String browserName, String appUrl) {
+
+		driver = getDriverBroswer(browserName, appUrl);
 
 		driver.get("http://live.demoguru99.com/");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

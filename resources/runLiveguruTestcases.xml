@@ -1,40 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="LiveGuru" parallel="false">
 
-  <!-- this parameter url config url for all <test></test>  -->>
-  <parameter name ="url" value="http://live.demoguru99.com/" />
- 
-  <test name="Run On Firefox">
-  <parameter name="browser" value="firefox"/>
-<!--   <parameter name = "url" value = "http://live.demoguru99.com/"/> 
-  		this parameter config url  one test -->
-  	
-	    <classes> 
-	      <class name="come.liveguru.user.Level_04_Register_To_System_Multiple_Browser"/>
-	      
-	    </classes>
-  </test> 
-  
-    <test name="Run On Chrome">
-    <parameter name="browser" value="chrome"/>
-	    <classes>
-	      <class name="come.liveguru.user.Level_04_Register_To_System_Multiple_Browser"/>
-	    </classes>
-  	</test>
-  
-    <test name="Run On Edge">
-    <parameter name="browser" value="edge" />
-	    <classes>
-	      <class name="come.liveguru.user.Level_04_Register_To_System_Multiple_Browser"/>
-	    </classes>
-  	</test>
-  	
-  	
-    <test name="Run On Coc Coc">
-    <parameter name="browser" value="coccoc" />
-    <parameter name="urlTargetCoccoc" value="C:\Program Files (x86)\CocCoc\Browser\Application\browser.exe" />
-	    <classes>
-	      <class name="come.liveguru.user.Level_05_Register_To_System_Run_On_Coccoc"/>
-	    </classes>
-  	</test>
+	<!-- this parameter url config url for all <test></test> -->
+	
+	<parameter name="url" value="http://live.demoguru99.com/" />
+
+	<test name="Run On Firefox">
+		<parameter name="browser" value="firefox" />
+		<!-- <parameter name = "url" value = "http://live.demoguru99.com/"/> this 
+			parameter config url one test -->
+
+		<classes>
+			<class
+				name="come.liveguru.user.Level_05_Register_To_System_Run_On_Coccoc" />
+
+		</classes>
+	</test>
+
+	<test name="Run On Chrome">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class
+				name="come.liveguru.user.Level_05_Register_To_System_Run_On_Coccoc" />
+		</classes>
+	</test>
+
+	<test name="Run On Edge">
+		<parameter name="browser" value="edge" />
+		<classes>
+			<class
+				name="come.liveguru.user.Level_05_Register_To_System_Run_On_Coccoc" />
+		</classes>
+	</test>
+
+
+	<test name="Run On Coc Coc">
+		<parameter name="browser" value="coccoc" />
+		<!-- <parameter name="urlTargetCoccoc" value="C:\Program Files (x86)\CocCoc\Browser\Application\browser.exe" 
+			/> -->
+		<classes>
+			<class
+				name="come.liveguru.user.Level_05_Register_To_System_Run_On_Coccoc" />
+		</classes>
+	</test>
 </suite> 
