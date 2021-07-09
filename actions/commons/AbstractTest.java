@@ -9,6 +9,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
+import driverFactory.DriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public abstract class AbstractTest {
@@ -33,6 +34,8 @@ public abstract class AbstractTest {
 			driver = new EdgeDriver();
 			break;
 		case IE:
+			WebDriverManager.iedriver().arch32().setup();
+			driver = new InternetExplorerDriver();
 			break;
 			
 		default:

@@ -12,7 +12,7 @@
 
 		<classes>
 			<class
-				name="come.liveguru.user.Level_05_Register_To_System_Run_On_Coccoc" />
+				name="come.liveguru.user.Level_06_Register_To_System_Driver_Factory_Pattern" />
 
 		</classes>
 	</test>
@@ -21,7 +21,7 @@
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class
-				name="come.liveguru.user.Level_05_Register_To_System_Run_On_Coccoc" />
+				name="come.liveguru.user.Level_06_Register_To_System_Driver_Factory_Pattern" />
 		</classes>
 	</test>
 
@@ -29,7 +29,7 @@
 		<parameter name="browser" value="edge" />
 		<classes>
 			<class
-				name="come.liveguru.user.Level_05_Register_To_System_Run_On_Coccoc" />
+				name="come.liveguru.user.Level_06_Register_To_System_Driver_Factory_Pattern" />
 		</classes>
 	</test>
 
@@ -40,7 +40,7 @@
 			/> -->
 		<classes>
 			<class
-				name="come.liveguru.user.Level_05_Register_To_System_Run_On_Coccoc" />
+				name="come.liveguru.user.Level_06_Register_To_System_Driver_Factory_Pattern" />
 		</classes>
 	</test>
 </suite> 
