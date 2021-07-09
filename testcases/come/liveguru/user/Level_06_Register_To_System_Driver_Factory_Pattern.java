@@ -31,7 +31,7 @@ public class Level_06_Register_To_System_Driver_Factory_Pattern extends Abstract
 	LoginPageObject loginPage;
 	RegisterPageObject registerPage;
 	MyDashBroadPageObject mydashbroadPage;
-
+	//
 	String firstName = "", lastname = "", email = "", password = "", confirmPass = "";
 	DriverManager driverManager;
 	@Parameters({"browser" , "url"})
