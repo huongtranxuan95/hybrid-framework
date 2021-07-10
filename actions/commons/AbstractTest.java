@@ -15,6 +15,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public abstract class AbstractTest {
 	WebDriver driver;
 	String userDir = System.getProperty("user.dir");
+	
+	protected static ThreadLocal<WebDriver> threadLocalDriver = new ThreadLocal<WebDriver>();
+	
 	protected WebDriver getDriverBroswer(String browserName) {
 		Browser browser = Browser.valueOf(browserName.toUpperCase());
 		switch ( browser) {
@@ -47,6 +50,48 @@ public abstract class AbstractTest {
 	}
 
 	
+	
+	//getDriverBrowser use threadlocal
+	protected WebDriver getDriverBroswerUseThreadLocal(String browserName, String url) {
+		Browser browser = Browser.valueOf(browserName.toUpperCase());
+		switch ( browser) {
+		case FIREFOX:
+			//System.setProperty("webdriver.gecko.driver", userDir+"\\browserDrivers\\geckodriver.exe");
+			WebDriverManager.firefoxdriver().setup();
+			setDriver(new FirefoxDriver());
+			break;
+		case CHROME:
+			//System.setProperty("webdriver.chrome.driver", userDir+"\\browserDrivers\\chromedriver.exe");
+			WebDriverManager.chromedriver().setup();
+			setDriver(new ChromeDriver());
+			break;
+		case EDGE:
+			//System.setProperty("webdriver.edge.driver", userDir+"\\browserDrivers\\msedgedriver.exe");
+			WebDriverManager.edgedriver().setup();
+			setDriver(new EdgeDriver());
+			break;
+		case IE:
+			WebDriverManager.iedriver().arch32().setup();
+			setDriver(new InternetExplorerDriver());
+			break;
+		case COCCOC:
+			//System.setProperty("webdriver.chrome.driver", userDir+"\\browserDrivers\\chromedriver_coccoc.exe");
+			WebDriverManager.chromedriver().driverVersion("90.0.4430.24").setup();
+			ChromeOptions options = new ChromeOptions();
+			options.setBinary("C:\\Program Files (x86)\\CocCoc\\Browser\\Application\\browser.exe");
+			//options.setBinary(urlCoccocBrowser);
+			setDriver(new ChromeDriver(options));
+			break;
+			
+		default:
+			throw new RuntimeException("Please input your browser");
+		}
+		threadLocalDriver.get().get(url);
+		threadLocalDriver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		return threadLocalDriver.get();
+	}
+	
+	//getDriverBrowser don't use threadlocal
 	protected WebDriver getDriverBroswer(String browserName, String url) {
 		Browser browser = Browser.valueOf(browserName.toUpperCase());
 		switch ( browser) {
@@ -84,5 +129,19 @@ public abstract class AbstractTest {
 		driver.get(url);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return driver;
+	}
+	
+	// remove driver in threadlocalDriver
+	protected void removeDriver() {
+		threadLocalDriver.get().quit();
+		threadLocalDriver.remove();
+	}
+	
+	private WebDriver getDriver() {
+		return threadLocalDriver.get();
+	}
+	
+	private void setDriver(WebDriver driver) {
+		threadLocalDriver.set(driver);
 	}
 }
