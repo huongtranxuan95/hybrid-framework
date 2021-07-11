@@ -3,7 +3,10 @@ package come.liveguru.user;
 import org.testng.annotations.Test;
 
 import commons.AbstractPage;
+import commons.AbstractTest;
 import commons.ByLocator;
+import driverFactory.DriverFactory;
+import driverFactory.DriverManager;
 import pageObjects.livegurru.HomePageObject;
 import pageObjects.livegurru.LoginPageObject;
 import pageObjects.livegurru.MyDashBroadPageObject;
@@ -11,8 +14,8 @@ import pageObjects.livegurru.RegisterPageObject;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -21,22 +24,23 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class Level_03_Register_To_System_Page_Object/* extends AbstractPage */ {
-	WebDriver driver;
+public class Level_08_Register_To_System_Page_Factory extends AbstractTest {
+	private WebDriver driver;
 	HomePageObject homePage;
 	LoginPageObject loginPage;
 	RegisterPageObject registerPage;
 	MyDashBroadPageObject mydashbroadPage;
-
+	//
 	String firstName = "", lastname = "", email = "", password = "", confirmPass = "";
-
+	DriverManager driverManager;
+	@Parameters({"browser" , "url"})
 	@BeforeClass
-	public void beforeClass() {
-		System.setProperty("webdriver.gecko.driver", ".\\browserDrivers\\geckodriver.exe");
-		driver = new FirefoxDriver();
+	public void beforeClass(String browserName, String appUrl) {
+		driverManager = DriverFactory.getBrowserDriver(browserName);
+		driver = getDriverBroswerUseThreadLocal(browserName, appUrl);
 
-		driver.get("http://live.demoguru99.com/");
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		//driver.get("http://live.demoguru99.com/");
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		firstName = "name";
 		lastname = "nguyen";
@@ -51,7 +55,7 @@ public class Level_03_Register_To_System_Page_Object/* extends AbstractPage */ {
 	@BeforeMethod
 	public void beforeMethod() {
 		homePage.clickToMyAccountLink();
-		
+		//clickToElement(driver,ByLocator.XPATH, "//div[@class='footer']//a[text()='My Account']");
 		sleepSeconds(1);
 
 		loginPage = new LoginPageObject(driver);
@@ -66,6 +70,7 @@ public class Level_03_Register_To_System_Page_Object/* extends AbstractPage */ {
 
 		// sleepSeconds(1);
 		registerPage.clickToRegisterButton();
+		//clickToElement(driver, ByLocator.XPATH, "//button[@title='Register']");sleepSeconds(1);
 
 		Assert.assertEquals(registerPage.getRequireErrorMessageAtFirstnameTextbox(), "This is a required field.");
 		Assert.assertEquals(registerPage.getRequireErrorMessageAtLastnameTextbox(), "This is a required field.");
@@ -129,28 +134,15 @@ public class Level_03_Register_To_System_Page_Object/* extends AbstractPage */ {
 		registerPage.clickToRegisterButton();
 		
 		mydashbroadPage = new MyDashBroadPageObject(driver);
-		//Assert.assertTrue(mydashbroadPage.isMyDashbroadDisplayed());
 		Assert.assertTrue(mydashbroadPage.isWelcomeMessageSuccessful());
 
 	}
 
-	public int randomInt() {
-		Random ran = new Random();
-		return ran.nextInt(10000) + 1;
-	}
-
-	public void sleepSeconds(long timeout) {
-		try {
-			Thread.sleep(1000 * timeout);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	@AfterClass
 	public void afterClass() {
-		driver.quit();
+		//driver.quit();
+		removeDriver();
 	}
 
 }

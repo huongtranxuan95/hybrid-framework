@@ -139,20 +139,7 @@ public class Level_07_Register_To_System_Parallel_ThreadLocal extends AbstractTe
 
 	}
 
-	public int randomInt() {
-		Random ran = new Random();
-		return ran.nextInt(10000) + 1;
-	}
-
-	public void sleepSeconds(long timeout) {
-		try {
-			Thread.sleep(1000 * timeout);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
+	
 	@AfterClass
 	public void afterClass() {
 		//driver.quit();

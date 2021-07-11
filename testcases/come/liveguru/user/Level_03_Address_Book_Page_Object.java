@@ -24,7 +24,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class Level_03_Address_Book_Page_Object extends AbstractPage {
+public class Level_03_Address_Book_Page_Object /* extends AbstractPage */ {
 	WebDriver driver;
 	HomePageObject homePage;
 	LoginPageObject loginPage;
