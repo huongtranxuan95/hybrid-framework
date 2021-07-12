@@ -12,7 +12,7 @@
 
 		<classes>
 			<class
-				name="come.liveguru.user.Level_08_Register_To_System_Page_Factory" />
+				name="come.liveguru.user.Level_09_Address_Book_Page_Generator" />
 
 		</classes>
 	</test>
@@ -21,7 +21,7 @@
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class
-				name="come.liveguru.user.Level_08_Register_To_System_Page_Factory" />
+				name="come.liveguru.user.Level_09_Address_Book_Page_Generator" />
 		</classes>
 	</test>
 
@@ -29,18 +29,18 @@
 		<parameter name="browser" value="edge" />
 		<classes>
 			<class
-				name="come.liveguru.user.Level_08_Register_To_System_Page_Factory" />
+				name="come.liveguru.user.Level_09_Address_Book_Page_Generator" />
 		</classes>
 	</test>
 <!--  -->
 
 	<test name="Run On Coc Coc">
 		<parameter name="browser" value="coccoc" />
-		<!-- <parameter name="urlTargetCoccoc" value="C:\Program Files (x86)\CocCoc\Browser\Application\browser.exe" 
-			/> -->
+		<parameter name="urlTargetCoccoc" value="C:\Program Files (x86)\CocCoc\Browser\Application\browser.exe" 
+			/>
 		<classes>
 			<class
-				name="come.liveguru.user.Level_08_Register_To_System_Page_Factory" />
+				name="come.liveguru.user.Level_09_Address_Book_Page_Generator" />
 		</classes>
 	</test>
 </suite> 

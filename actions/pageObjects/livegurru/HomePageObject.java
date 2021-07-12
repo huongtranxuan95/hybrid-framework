@@ -18,9 +18,10 @@ public class HomePageObject extends AbstractPage{
 		this.driver = driver;
 	}
 
-	public void clickToMyAccountLink() {
+	public LoginPageObject clickToMyAccountLink() {
 		waitElementClickable(driver, ByLocator.XPATH, HomePageUI.MY_ACCOUNT_LINK_XPATH);
 		clickToElement(driver,ByLocator.XPATH, HomePageUI.MY_ACCOUNT_LINK_XPATH);
+		return PageGeneratorManager.getLoginPage(driver);
 	}
 	// chứa những actions của từng page
 	// 7 Sự kiện 

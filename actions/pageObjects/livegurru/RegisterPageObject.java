@@ -15,9 +15,10 @@ public class RegisterPageObject extends AbstractPage {
 		this.driver = driver;
 	}
 
-	public void clickToRegisterButton() {
+	public MyDashBroadPageObject clickToRegisterButton() {
 		waitElementClickable(driver, ByLocator.XPATH, RegisterPageUI.REGISTER_BUTTON_XPATH);
 		clickToElement(driver, ByLocator.XPATH, RegisterPageUI.REGISTER_BUTTON_XPATH);
+		return PageGeneratorManager.getMyDashBoardPage(driver);
 	}
 
 	public String getRequireErrorMessageAtFirstnameTextbox() {

@@ -147,7 +147,7 @@ public abstract class AbstractTest {
 	}
 	protected int randomInt() {
 		Random ran = new Random();
-		return ran.nextInt(10000) + 1;
+		return ran.nextInt(100000) + 1000;
 	}
 	
 	public void sleepSeconds(long timeout) {
