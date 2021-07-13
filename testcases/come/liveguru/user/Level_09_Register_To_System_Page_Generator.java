@@ -10,6 +10,7 @@ import driverFactory.DriverManager;
 import pageObjects.livegurru.HomePageObject;
 import pageObjects.livegurru.LoginPageObject;
 import pageObjects.livegurru.MyDashBroadPageObject;
+import pageObjects.livegurru.PageGeneratorManager;
 import pageObjects.livegurru.RegisterPageObject;
 
 import org.testng.annotations.BeforeClass;
@@ -50,19 +51,16 @@ public class Level_09_Register_To_System_Page_Generator extends AbstractTest {
 		password = "123456";
 		confirmPass = password;
 
-		homePage = new HomePageObject(driver);
+		homePage = PageGeneratorManager.getHomePage(driver);
 
 	}
 
 	@BeforeMethod
 	public void beforeMethod() {
-		homePage.clickToMyAccountLink();
-		//clickToElement(driver,ByLocator.XPATH, "//div[@class='footer']//a[text()='My Account']");
+		loginPage = homePage.clickToMyAccountLink();
 		sleepSeconds(1);
 
-		loginPage = new LoginPageObject(driver);
-		loginPage.clickToCreatAnAccountButton();
-		registerPage = new RegisterPageObject(driver);
+		registerPage = loginPage.clickToCreatAnAccountButton();
 		sleepSeconds(1);
 
 	}
@@ -70,9 +68,8 @@ public class Level_09_Register_To_System_Page_Generator extends AbstractTest {
 	@Test
 	public void Register_01_Empty_Data() {
 
-		// sleepSeconds(1);
 		registerPage.clickToRegisterButton();
-		//clickToElement(driver, ByLocator.XPATH, "//button[@title='Register']");sleepSeconds(1);
+		
 
 		Assert.assertEquals(registerPage.getRequireErrorMessageAtFirstnameTextbox(), "This is a required field.");
 		Assert.assertEquals(registerPage.getRequireErrorMessageAtLastnameTextbox(), "This is a required field.");
@@ -133,25 +130,10 @@ public class Level_09_Register_To_System_Page_Generator extends AbstractTest {
 		registerPage.inputToEmailTextbox(email);
 		registerPage.inputToPasswordTextbox(password);
 		registerPage.inputToConfirmPassTextbox(password);
-		registerPage.clickToRegisterButton();
+		mydashbroadPage =registerPage.clickToRegisterButton();
 		
-		mydashbroadPage = new MyDashBroadPageObject(driver);
 		Assert.assertTrue(mydashbroadPage.isWelcomeMessageSuccessful());
 
-	}
-
-	public int randomInt() {
-		Random ran = new Random();
-		return ran.nextInt(10000) + 1;
-	}
-
-	public void sleepSeconds(long timeout) {
-		try {
-			Thread.sleep(1000 * timeout);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@AfterClass

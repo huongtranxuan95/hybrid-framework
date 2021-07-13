@@ -15,6 +15,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageObjects.bankguru.BankManagerPageObject;
+import pageObjects.bankguru.DepositPageObject;
+import pageObjects.bankguru.NewAccountPageObject;
+import pageObjects.bankguru.NewCustomerPageObject;
+import pageObjects.bankguru.WithdrawalPageObject;
+import pageObjects.livegurru.AboutUsPageObject;
+import pageObjects.livegurru.AdvanceSearcgPageObject;
+import pageObjects.livegurru.CustomerServicePageObject;
+import pageObjects.livegurru.SearchTermPageObject;
+import pageUIs.bankguru.AbstractBankGuruPageUI;
+import pageUIs.liveguru.AbstractPageUI;
+
 public abstract class AbstractPage {
 	private Alert alert;
 	private WebElement element;
@@ -386,5 +398,59 @@ public abstract class AbstractPage {
 			break;
 		}
 		return locator;
+	}
+	
+	// open Pages general Of liveguru
+	
+	public AboutUsPageObject openAboutUsPage(WebDriver driver) {
+		waitElementClickable(driver, ByLocator.XPATH, AbstractPageUI.ABOUT_US_LINK_XPATH);
+		clickToElement(driver, ByLocator.XPATH, AbstractPageUI.ABOUT_US_LINK_XPATH);
+		return new AboutUsPageObject(driver);
+	}
+	
+	public SearchTermPageObject openSearchTermPage(WebDriver driver) {
+		waitElementClickable(driver, ByLocator.XPATH, AbstractPageUI.SEARCH_TERM_LINK_XPATH);
+		clickToElement(driver,ByLocator.XPATH, AbstractPageUI.SEARCH_TERM_LINK_XPATH);
+		return new SearchTermPageObject(driver);
+	}
+
+	public CustomerServicePageObject openCustomerServicePage(WebDriver driver) {
+		waitElementClickable(driver, ByLocator.XPATH, AbstractPageUI.CUSTOMER_SERVICE_LINK_XPATH);
+		clickToElement(driver,ByLocator.XPATH, AbstractPageUI.CUSTOMER_SERVICE_LINK_XPATH);
+		return new CustomerServicePageObject(driver);
+	}
+	public AdvanceSearcgPageObject openAdvanceSearchPage(WebDriver driver) {
+		waitElementClickable(driver, ByLocator.XPATH, AbstractPageUI.ADVANCE_SEARCH_LINK_XPATH);
+		clickToElement(driver,ByLocator.XPATH, AbstractPageUI.ADVANCE_SEARCH_LINK_XPATH);
+		return new AdvanceSearcgPageObject(driver);
+	}
+	
+	
+	//open page of bankguru
+	public BankManagerPageObject openManagerPage(WebDriver driver) {
+		waitElementClickable(driver, ByLocator.XPATH, AbstractBankGuruPageUI.MANAGER_LINK_XPATH);
+		clickToElement(driver,ByLocator.XPATH, AbstractBankGuruPageUI.MANAGER_LINK_XPATH);
+		return new BankManagerPageObject(driver);
+	}
+	
+	public NewCustomerPageObject openNewCustomerPage(WebDriver driver) {
+		waitElementClickable(driver, ByLocator.XPATH, AbstractBankGuruPageUI.NEW_CUSTOMER_LINK_XPATH);
+		clickToElement(driver,ByLocator.XPATH, AbstractBankGuruPageUI.NEW_CUSTOMER_LINK_XPATH);
+		return new NewCustomerPageObject(driver);
+	}
+	public NewAccountPageObject openNewAccountPage(WebDriver driver) {
+		waitElementClickable(driver, ByLocator.XPATH, AbstractBankGuruPageUI.NEW_ACCOUNT_LINK_XPATH);
+		clickToElement(driver,ByLocator.XPATH, AbstractBankGuruPageUI.NEW_ACCOUNT_LINK_XPATH);
+		return new NewAccountPageObject(driver);
+	}
+	public WithdrawalPageObject openWithdrawalPage(WebDriver driver) {
+		waitElementClickable(driver, ByLocator.XPATH, AbstractBankGuruPageUI.WITH_DRAWAL_LINK_XPATH);
+		clickToElement(driver,ByLocator.XPATH, AbstractBankGuruPageUI.WITH_DRAWAL_LINK_XPATH);
+		return new WithdrawalPageObject(driver);
+	}
+	public DepositPageObject openDepositPage(WebDriver driver) {
+		waitElementClickable(driver, ByLocator.XPATH, AbstractBankGuruPageUI.DEPOSIT_LINK_XPATH);
+		clickToElement(driver,ByLocator.XPATH, AbstractBankGuruPageUI.DEPOSIT_LINK_XPATH);
+		return new DepositPageObject(driver);
 	}
 }

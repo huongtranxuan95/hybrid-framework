@@ -50,6 +50,8 @@ public class AddressBookPageObject extends AbstractPage {
 		waitElementVisible(driver, ByLocator.XPATH, AddressPageUI.ADD_ADDRESS_MSG_SUCCESSFUL_XPATH);
 		return isElementDisplayed(driver, ByLocator.XPATH, AddressPageUI.ADD_ADDRESS_MSG_SUCCESSFUL_XPATH);
 	}
+
+
 	
 
 }

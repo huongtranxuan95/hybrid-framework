@@ -23,4 +23,17 @@ public class PageGeneratorManager {
 	public static AddressBookPageObject getAddressBookPage(WebDriver driver) {
 		return new AddressBookPageObject(driver);
 	}
+	
+	public static SearchTermPageObject getSearchTermPage(WebDriver driver) {
+		return new SearchTermPageObject(driver);
+	}
+	public static CustomerServicePageObject getCustomerServicePage(WebDriver driver) {
+		return new CustomerServicePageObject(driver);
+	}
+	public static AboutUsPageObject getAboutUsPage(WebDriver driver) {
+		return new AboutUsPageObject(driver);
+	}
+	public static AdvanceSearcgPageObject getAdvanceSearcgPage(WebDriver driver) {
+		return new AdvanceSearcgPageObject(driver);
+	}
 }
