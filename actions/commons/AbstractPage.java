@@ -137,6 +137,10 @@ public abstract class AbstractPage {
 	public WebElement find(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		return driver.findElement(locatorElement(locatorType, locatorPath));
 	}
+	
+	public WebElement find(WebDriver driver, String locatorPath) {
+		return driver.findElement(By.xpath(locatorPath));
+	}
 
 	public List<WebElement> finds(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		return driver.findElements(locatorElement(locatorType, locatorPath));
@@ -145,9 +149,17 @@ public abstract class AbstractPage {
 	public void clickToElement(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		find(driver, locatorType, locatorPath).click();
 	}
+	public void clickToElement(WebDriver driver, String locatorPath, String...values) {
+		find(driver, getDynamicLocator(locatorPath, values)).click();
+	}
 
 	public void sendKeysToElement(WebDriver driver, ByLocator locatorType, String locatorPath, String text) {
 		element = find(driver, locatorType, locatorPath);
+		element.clear();
+		element.sendKeys(text);
+	}
+	public void sendKeysToElement(WebDriver driver, String locatorPath, String text, String... values ) {
+		element = find(driver, getDynamicLocator(locatorPath, values));
 		element.clear();
 		element.sendKeys(text);
 	}
@@ -201,6 +213,9 @@ public abstract class AbstractPage {
 
 	public boolean isElementDisplayed(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		return find(driver, locatorType, locatorPath).isDisplayed();
+	}
+	public boolean isElementDisplayed(WebDriver driver, String locatorPath, String... values) {
+		return find(driver, getDynamicLocator(locatorPath, values)).isDisplayed();
 	}
 
 	public boolean isElementEnabled(WebDriver driver, ByLocator locatorType, String locatorPath) {
@@ -398,6 +413,12 @@ public abstract class AbstractPage {
 			break;
 		}
 		return locator;
+	}
+	
+	public String getDynamicLocator(String xpathValue, String... values) {
+		xpathValue = String.format(xpathValue, (Object[])values);
+		return xpathValue;
+		
 	}
 	
 	// open Pages general Of liveguru
