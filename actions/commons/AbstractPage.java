@@ -145,6 +145,9 @@ public abstract class AbstractPage {
 	public List<WebElement> finds(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		return driver.findElements(locatorElement(locatorType, locatorPath));
 	}
+	public List<WebElement> finds(WebDriver driver, String locatorPath, String...values) {
+		return driver.findElements(By.xpath(getDynamicLocator(locatorPath, values)));
+	}
 
 	public void clickToElement(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		find(driver, locatorType, locatorPath).click();
@@ -168,9 +171,17 @@ public abstract class AbstractPage {
 		select = new Select(find(driver, locatorType, locatorPath));
 		select.selectByVisibleText(itemValue);
 	}
+	public void selectItemInDropdown(WebDriver driver, String locatorPath, String itemValue, String... values) {
+		select = new Select(find(driver, getDynamicLocator(locatorPath, values)));
+		select.selectByVisibleText(itemValue);
+	}
 
 	public String getSelectedItemInDropdown(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		select = new Select(find(driver, locatorType, locatorPath));
+		return select.getFirstSelectedOption().getText();
+	}
+	public String getSelectedItemInDropdown(WebDriver driver, String locatorPath, String... values) {
+		select = new Select(find(driver, getDynamicLocator(locatorPath, values)));
 		return select.getFirstSelectedOption().getText();
 	}
 
@@ -202,13 +213,22 @@ public abstract class AbstractPage {
 	public String getElementAttribute(WebDriver driver, ByLocator locatorType, String locatorPath, String attributeName) {
 		return find(driver, locatorType, locatorPath).getAttribute(attributeName);
 	}
+	public String getElementAttribute(WebDriver driver, String locatorPath, String attributeName, String... values) {
+		return find(driver, getDynamicLocator(locatorPath, values)).getAttribute(attributeName);
+	}
 
 	public String getElementText(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		return find(driver, locatorType, locatorPath).getText();
 	}
+	public String getElementText(WebDriver driver, String locatorPath, String... values) {
+		return find(driver, getDynamicLocator(locatorPath, values)).getText();
+	}
 
 	public int countElementNumber(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		return finds(driver,locatorType ,locatorPath).size();
+	}
+	public int countElementNumber(WebDriver driver, String locatorPath, String... values) {
+		return finds(driver,getDynamicLocator(locatorPath, values)).size();
 	}
 
 	public boolean isElementDisplayed(WebDriver driver, ByLocator locatorType, String locatorPath) {
@@ -310,10 +330,23 @@ public abstract class AbstractPage {
 		sleepSeconds(1);
 		js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style", originalStyle);
 	}
+	public void highlightElement(WebDriver driver, String locatorPath, String...values) {
+		element = find(driver, getDynamicLocator(locatorPath, values));
+		js = (JavascriptExecutor) driver;
+		String originalStyle = element.getAttribute("style");
+		js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style",
+				"border: 2px solid red; border-style: dashed;");
+		sleepSeconds(1);
+		js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style", originalStyle);
+	}
 
 	public void clickToElementByJS(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", find(driver, locatorType, locatorPath));
+	}
+	public void clickToElementByJS(WebDriver driver, String locatorPath, String...values) {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", find(driver, getDynamicLocator(locatorPath, values)));
 	}
 
 	public void scrollToElement(WebDriver driver, ByLocator locatorType, String locatorPath) {
@@ -358,10 +391,18 @@ public abstract class AbstractPage {
 		explicitWait = new WebDriverWait(driver, longTimeout);
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(locatorElement(locatorType, locatorPath)));
 	}
+	public void waitElementVisible(WebDriver driver, String locatorPath, String...values) {
+		explicitWait = new WebDriverWait(driver, longTimeout);
+		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(getDynamicLocator(locatorPath, values))));
+	}
 
 	public void waitElementInVisible(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		explicitWait = new WebDriverWait(driver, longTimeout);
 		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(locatorElement(locatorType, locatorPath)));
+	}
+	public void waitElementInVisible(WebDriver driver, String locatorPath, String...values) {
+		explicitWait = new WebDriverWait(driver, longTimeout);
+		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(getDynamicLocator(locatorPath, values))));
 	}
 
 	public void waitElementPresence(WebDriver driver, ByLocator locatorType, String locatorPath) {
@@ -372,6 +413,10 @@ public abstract class AbstractPage {
 	public void waitElementClickable(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		explicitWait = new WebDriverWait(driver, longTimeout);
 		explicitWait.until(ExpectedConditions.elementToBeClickable(locatorElement(locatorType, locatorPath)));
+	}
+	public void waitElementClickable(WebDriver driver, String locatorPath, String...values) {
+		explicitWait = new WebDriverWait(driver, longTimeout);
+		explicitWait.until(ExpectedConditions.elementToBeClickable(By.xpath(getDynamicLocator(locatorPath, values))));
 	}
 
 	public void waitAlertPresence(WebDriver driver) {
