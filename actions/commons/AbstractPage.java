@@ -23,6 +23,7 @@ import pageObjects.bankguru.WithdrawalPageObject;
 import pageObjects.livegurru.AboutUsPageObject;
 import pageObjects.livegurru.AdvanceSearcgPageObject;
 import pageObjects.livegurru.CustomerServicePageObject;
+import pageObjects.livegurru.PageGeneratorManager;
 import pageObjects.livegurru.SearchTermPageObject;
 import pageUIs.bankguru.AbstractBankGuruPageUI;
 import pageUIs.liveguru.AbstractPageUI;
@@ -471,24 +472,48 @@ public abstract class AbstractPage {
 	public AboutUsPageObject openAboutUsPage(WebDriver driver) {
 		waitElementClickable(driver, ByLocator.XPATH, AbstractPageUI.ABOUT_US_LINK_XPATH);
 		clickToElement(driver, ByLocator.XPATH, AbstractPageUI.ABOUT_US_LINK_XPATH);
-		return new AboutUsPageObject(driver);
+		return PageGeneratorManager.getAboutUsPage(driver);
 	}
 	
 	public SearchTermPageObject openSearchTermPage(WebDriver driver) {
 		waitElementClickable(driver, ByLocator.XPATH, AbstractPageUI.SEARCH_TERM_LINK_XPATH);
 		clickToElement(driver,ByLocator.XPATH, AbstractPageUI.SEARCH_TERM_LINK_XPATH);
-		return new SearchTermPageObject(driver);
+		return PageGeneratorManager.getSearchTermPage(driver);
 	}
 
 	public CustomerServicePageObject openCustomerServicePage(WebDriver driver) {
 		waitElementClickable(driver, ByLocator.XPATH, AbstractPageUI.CUSTOMER_SERVICE_LINK_XPATH);
 		clickToElement(driver,ByLocator.XPATH, AbstractPageUI.CUSTOMER_SERVICE_LINK_XPATH);
-		return new CustomerServicePageObject(driver);
+		return PageGeneratorManager.getCustomerServicePage(driver);
 	}
 	public AdvanceSearcgPageObject openAdvanceSearchPage(WebDriver driver) {
 		waitElementClickable(driver, ByLocator.XPATH, AbstractPageUI.ADVANCE_SEARCH_LINK_XPATH);
 		clickToElement(driver,ByLocator.XPATH, AbstractPageUI.ADVANCE_SEARCH_LINK_XPATH);
-		return new AdvanceSearcgPageObject(driver);
+		return PageGeneratorManager.getAdvanceSearcgPage(driver);
+	}
+	
+	//open page use dynamic locator
+	
+	//Less than 20 page
+	public AbstractPage openFooterPageByName(WebDriver driver, String pageName) {
+		waitElementClickable(driver, AbstractPageUI.DYNAMIC_FOOTER_LOCATOR, pageName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_FOOTER_LOCATOR, pageName);
+		if(pageName.equals("About Us")) {
+			return PageGeneratorManager.getAboutUsPage(driver);
+		}else if (pageName.equals("Customer Service")) {
+			return PageGeneratorManager.getCustomerServicePage(driver);
+		}else if (pageName.equals("Search Terms")) {
+			return PageGeneratorManager.getSearchTermPage(driver);
+		}else if (pageName.equals("Advanced Search")) {
+			return PageGeneratorManager.getAdvanceSearcgPage(driver);
+		}else {
+			return PageGeneratorManager.getHomePage(driver);
+		}
+	}
+	// less or more pages
+	public void openFooterByName(WebDriver driver, String pageName) {
+		waitElementClickable(driver, AbstractPageUI.DYNAMIC_FOOTER_LOCATOR, pageName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_FOOTER_LOCATOR, pageName);	
 	}
 	
 	

@@ -1,5 +1,7 @@
 package pageUIs.liveguru;
 
+import commons.ByLocator;
+
 public class AbstractPageUI {
 	public static final String ABOUT_US_LINK_XPATH = "//a[text()='About Us']";
 	public static final String CONTACT_US_LINK_XPATH="//a[text()='Contact Us']";
@@ -10,6 +12,8 @@ public class AbstractPageUI {
 	public static final String ADVANCE_SEARCH_LINK_XPATH="//a[text()='Advanced Search']";
 	public static final String MY_ACCOUNT_LINK_FOOTER_XPATH="//div[@class='footer']//a[text()='My Account']";
 	public static final String ORDER_AND_RETURNS_LINK_XPATH ="//a[text()='Orders and Returns']";
+	
+	public static final String DYNAMIC_FOOTER_LOCATOR = "//a[text()='%s']";
 	
 //	public static final String ACCOUNT_LINK_HEADER_XPATH = "//header[@id='header']//span[text()='Account']";
 //	public static final String MY_ACCOUNT_LINK_HEADER_XPATH = "//header[@id='header']//a[text()='My Account']";
