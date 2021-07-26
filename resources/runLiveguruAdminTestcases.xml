@@ -3,11 +3,11 @@
 
 	<!-- this parameter url config url for all <test></test> -->
 	
-	<parameter name="url" value="http://live.demoguru99.com/" />
+	<parameter name="url" value="http://live.demoguru99.com/index.php/backendlogin" />
 
 	<test name="Run On Firefox">
 		<parameter name="browser" value="firefox" />
-		<!-- <parameter name = "url" value = "http://live.demoguru99.com/"/> this 
+		<!-- <parameter name = "url" value = "http://live.demoguru99.com/index.php/backendlogin"/> this 
 			parameter config url one test -->
 
 		<classes>

@@ -54,7 +54,7 @@ public class Level_11_Address_Book_Dynamic_Locator extends AbstractTest {
 	@BeforeClass
 	public void beforeClass(String browserName, String appUrl) {
 		driverManager = DriverFactory.getBrowserDriver(browserName);
-		//driver = getDriverBroswer(browserName, appUrl);
+
 		driver = driverManager.getDriver(appUrl);
 		
 		firstName = "name";

@@ -36,4 +36,11 @@ public class PageGeneratorManager {
 	public static AdvanceSearcgPageObject getAdvanceSearcgPage(WebDriver driver) {
 		return new AdvanceSearcgPageObject(driver);
 	}
+	
+	public static LoginAdminPageObject getLoginAdminPage(WebDriver driver) {
+		return new LoginAdminPageObject(driver);
+	}
+	public static ManageCustomersAdminPageObject getManagerCustomersAdminPage(WebDriver driver) {
+		return new ManageCustomersAdminPageObject(driver);
+	}
 }
