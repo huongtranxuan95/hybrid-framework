@@ -14,16 +14,7 @@ public class AbstractPageUI {
 	public static final String ORDER_AND_RETURNS_LINK_XPATH ="//a[text()='Orders and Returns']";
 	
 	public static final String DYNAMIC_FOOTER_LOCATOR = "//a[text()='%s']";
-	
-//	public static final String ACCOUNT_LINK_HEADER_XPATH = "//header[@id='header']//span[text()='Account']";
-//	public static final String MY_ACCOUNT_LINK_HEADER_XPATH = "//header[@id='header']//a[text()='My Account']";
-//	public static final String MY_WISHLIST_LINK_HEADER_XPATH = "//header[@id='header']//a[text()='My Wishlist']";
-//	public static final String MY_CART_LINK_HEADER_XPATH = "//header[@id='header']//a[text()='My Cart']";
-//	public static final String CHECKOUT_LINK_HEADER_XPATH = "//header[@id='header']//a[text()='Checkout']";
-//	
-//	
-//	public static final String MOBILE_LINK_HEADER_XPATH = "//a[text()='Mobile']";
-//	public static final String TV_LINK_HEADER_XPATH = "//a[text()='Mobile']";
+	public static final String UPLOAD_FILE_TYPE = "//input[@type='file']";
 	
 	
 	

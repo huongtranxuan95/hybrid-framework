@@ -467,6 +467,26 @@ public abstract class AbstractPage {
 		
 	}
 	
+	//uploadMutipleFile
+//	/public String get
+	public void uploadMutipleFiles(WebDriver driver, String...values) {
+		String filePath = GlobalConstants.UPLOAD_FILE_FOLDER;
+		if(!isWindow()) {
+			filePath.replaceAll("\\\\", "/");
+		}
+		String fullFilePath = "";
+		for (String fileName : values) {
+			fullFilePath+=filePath+fileName+"\n";
+		}
+		find(driver, AbstractPageUI.UPLOAD_FILE_TYPE).sendKeys(fullFilePath.trim());
+	}
+	//check os_name
+	
+	public boolean isWindow() {
+		return GlobalConstants.OS_NAME.toLowerCase().contains("win");
+	}
+	
+	
 	// open Pages general Of liveguru
 	
 	public AboutUsPageObject openAboutUsPage(WebDriver driver) {

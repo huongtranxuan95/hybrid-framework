@@ -3,7 +3,7 @@
 
 	<!-- this parameter url config url for all <test></test> -->
 	
-	<parameter name="url" value="http://live.demoguru99.com/" />
+	<parameter name="url" value="https://blueimp.github.io/jQuery-File-Upload/" />
 
 	<test name="Run On Firefox">
 		<parameter name="browser" value="firefox" />
@@ -12,7 +12,7 @@
 
 		<classes>
 			<class
-				name="come.liveguru.user.Level_13_Handle_UploadFiles" />
+				name="com.jquery.uploadfile.Level_13_Handle_UploadFiles" />
 
 		</classes>
 	</test>
@@ -21,7 +21,7 @@
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class
-				name="come.liveguru.user.Level_13_Handle_UploadFiles" />
+				name="com.jquery.uploadfile.Level_13_Handle_UploadFiles" />
 		</classes>
 	</test>
 
@@ -29,7 +29,7 @@
 		<parameter name="browser" value="edge" />
 		<classes>
 			<class
-				name="come.liveguru.user.Level_13_Handle_UploadFiles" />
+				name="com.jquery.uploadfile.Level_13_Handle_UploadFiles" />
 		</classes>
 	</test>
 <!--  -->
@@ -40,7 +40,7 @@
 			/>
 		<classes>
 			<class
-				name="come.liveguru.user.Level_13_Handle_UploadFiles" />
+				name="com.jquery.uploadfile.Level_13_Handle_UploadFiles" />
 		</classes>
 	</test>
 </suite> 
