@@ -1,8 +1,13 @@
 package commons;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import javax.imageio.ImageIO;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -14,6 +19,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.sun.prism.Image;
 
 import pageObjects.bankguru.BankManagerPageObject;
 import pageObjects.bankguru.DepositPageObject;
@@ -27,6 +34,10 @@ import pageObjects.livegurru.PageGeneratorManager;
 import pageObjects.livegurru.SearchTermPageObject;
 import pageUIs.bankguru.AbstractBankGuruPageUI;
 import pageUIs.liveguru.AbstractPageUI;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.comparison.ImageDiff;
+import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 
 public abstract class AbstractPage {
 	private Alert alert;
@@ -141,6 +152,9 @@ public abstract class AbstractPage {
 	
 	public WebElement find(WebDriver driver, String locatorPath) {
 		return driver.findElement(By.xpath(locatorPath));
+	}
+	public WebElement find(WebDriver driver, String locatorPath, String...values) {
+		return driver.findElement(By.xpath(getDynamicLocator(locatorPath, values)));
 	}
 
 	public List<WebElement> finds(WebDriver driver, ByLocator locatorType, String locatorPath) {
@@ -469,6 +483,13 @@ public abstract class AbstractPage {
 	
 	//uploadMutipleFile
 //	/public String get
+	public String getFolderUpload() {
+		String filePath = GlobalConstants.UPLOAD_FILE_FOLDER;
+		if(!isWindow()) {
+			filePath.replaceAll("\\\\", "/");
+		}
+		return filePath;
+	}
 	public void uploadMutipleFiles(WebDriver driver, String...values) {
 		String filePath = GlobalConstants.UPLOAD_FILE_FOLDER;
 		if(!isWindow()) {
@@ -479,6 +500,52 @@ public abstract class AbstractPage {
 			fullFilePath+=filePath+fileName+"\n";
 		}
 		find(driver, AbstractPageUI.UPLOAD_FILE_TYPE).sendKeys(fullFilePath.trim());
+	}
+	
+	public boolean isFileExist(String filePath) {
+		File checkSaveFileSuccesfull = new File(filePath);
+		if (checkSaveFileSuccesfull.exists()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	public String getFilePathDownloadFolder() {
+		String filePath = GlobalConstants.DOWNLOAD_FILE_FOLDER;
+		if(!GlobalConstants.OS_NAME.toLowerCase().contains("win")) {
+			filePath = filePath.replaceAll("\\\\", "/");
+		}
+		
+		return filePath;
+	}
+	public String getFilePathUploadFolder() {
+		String filePath = GlobalConstants.UPLOAD_FILE_FOLDER;
+		if(!GlobalConstants.OS_NAME.toLowerCase().contains("win")) {
+			filePath = filePath.replaceAll("\\\\", "/");
+		}
+		
+		return filePath;
+	}
+	public boolean compareImage(WebDriver driver, String locator, String targetImgPath, String name) {
+		WebElement imgActual = find(driver, locator, name);
+		String imgPath = getFilePathDownloadFolder();
+		
+		Screenshot screenImg = new AShot().takeScreenshot(driver, imgActual);
+		BufferedImage expectedImg = null;
+		try {
+			expectedImg = ImageIO.read(new File(targetImgPath));
+		} catch (IOException e) {
+			System.out.println("Read file");
+			e.printStackTrace();
+		}
+		if(expectedImg!=null) {
+			BufferedImage actualImg = screenImg.getImage();
+			ImageDiffer imgdiff = new  ImageDiffer();
+			ImageDiff diff  = imgdiff.makeDiff(expectedImg, actualImg);
+			return diff.hasDiff();
+		}
+		
+		return false;
 	}
 	//check os_name
 	
