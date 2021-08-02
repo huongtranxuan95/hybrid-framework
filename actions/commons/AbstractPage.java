@@ -13,6 +13,8 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -38,8 +40,9 @@ import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
+import sun.management.counter.StringCounter;
 
-public abstract class AbstractPage {
+public abstract class AbstractPage extends AbstractPageUI{
 	private Alert alert;
 	private WebElement element;
 	private Select select;
@@ -160,6 +163,9 @@ public abstract class AbstractPage {
 	public List<WebElement> finds(WebDriver driver, ByLocator locatorType, String locatorPath) {
 		return driver.findElements(locatorElement(locatorType, locatorPath));
 	}
+	public List<WebElement> finds(WebDriver driver, String locatorPath) {
+		return driver.findElements( By.xpath(locatorPath));
+	}
 	public List<WebElement> finds(WebDriver driver, String locatorPath, String...values) {
 		return driver.findElements(By.xpath(getDynamicLocator(locatorPath, values)));
 	}
@@ -247,7 +253,38 @@ public abstract class AbstractPage {
 	}
 
 	public boolean isElementDisplayed(WebDriver driver, ByLocator locatorType, String locatorPath) {
-		return find(driver, locatorType, locatorPath).isDisplayed();
+		try {
+			return find(driver, locatorType, locatorPath).isDisplayed();
+		}catch (NoSuchElementException e) {
+			return false;
+		}catch (StaleElementReferenceException e2) {
+			return false;
+		}
+		
+	}
+	public boolean isElementUnDisplayed(WebDriver driver, String locatorPath) {
+		overrideImplicitWait(driver, GlobalConstants.SHORT_TIMEOUT);
+		itemList = finds(driver, locatorPath);
+		overrideImplicitWait(driver, GlobalConstants.LONG_TIMEOUT);
+		if(itemList.size() == 0) {	
+			return true;
+		}else if (itemList.size() != 0 && !itemList.get(0).isDisplayed()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	public boolean isElementUnDisplayed(WebDriver driver, String locatorPath, String...values) {
+		overrideImplicitWait(driver, GlobalConstants.SHORT_TIMEOUT);
+		itemList = finds(driver, locatorPath, values);
+		overrideImplicitWait(driver, GlobalConstants.LONG_TIMEOUT);
+		if(itemList.size() == 0) {	
+			return true;
+		}else if (itemList.size() != 0 && !itemList.get(0).isDisplayed()) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	public boolean isElementDisplayed(WebDriver driver, String locatorPath, String... values) {
 		return find(driver, getDynamicLocator(locatorPath, values)).isDisplayed();
@@ -412,11 +449,11 @@ public abstract class AbstractPage {
 	}
 
 	public void waitElementInVisible(WebDriver driver, ByLocator locatorType, String locatorPath) {
-		explicitWait = new WebDriverWait(driver, longTimeout);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.SHORT_TIMEOUT);
 		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(locatorElement(locatorType, locatorPath)));
 	}
 	public void waitElementInVisible(WebDriver driver, String locatorPath, String...values) {
-		explicitWait = new WebDriverWait(driver, longTimeout);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.SHORT_TIMEOUT);
 		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(getDynamicLocator(locatorPath, values))));
 	}
 
@@ -552,7 +589,9 @@ public abstract class AbstractPage {
 	public boolean isWindow() {
 		return GlobalConstants.OS_NAME.toLowerCase().contains("win");
 	}
-	
+	public void overrideImplicitWait(WebDriver driver, long timeout) {
+		driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+	}
 	
 	// open Pages general Of liveguru
 	
