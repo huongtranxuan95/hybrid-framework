@@ -156,32 +156,6 @@ public class Level_15_Address_Book_Assert_And_Verify extends AbstractTest {
 		verifyFalse(myAddressBook.isAddAddressMessageSuccessful());
 	}
 	
-	@Test
-	public void TC_01() {
-		js = (JavascriptExecutor)driver;
-		driver.get("https://demo-m2.bird.eu/admin/admin/index/index/key/d11585721945bddaf60cbfdf7c6bf56d6fc71fd21b013c5c6ea0efc79a4acad2/");
-		driver.findElement(By.xpath("//span[text()='Sign in']/parent::button")).click();
-		sleepSeconds(3);
-		driver.findElement(By.xpath("//span[text()='Customers']")).click();
-		
-		sleepSeconds(2);
-		driver.findElement(By.xpath("//span[text()='All Customers']")).click();
-		sleepSeconds(3);
-		
-		driver.findElement(By.xpath("(//a[text()='Edit'])[4]")).click();
-		sleepSeconds(3);
-		
-		driver.findElement(By.xpath("//span[text()='Account Information']")).click();
-		
-		sleepSeconds(3);
-		
-		System.out.println("Name: "+ js.executeScript("document.getElementsByClassName(\"admin__control-text\").namedItem(\"J57YC6H\").value"));
-		
-		
-		
-		
-		
-	}
 	
 	@AfterClass
 	public void afterClass() {
