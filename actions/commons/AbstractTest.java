@@ -173,11 +173,11 @@ public abstract class AbstractTest {
 	private boolean checkFailed(boolean condition) {
 		boolean pass = true;
 		try {
-			if (condition == false) {
-				//log.info(" -------------------------- PASSED -------------------------- ");
-			} else {
-				//log.info(" -------------------------- FAILED -------------------------- ");
-			}
+//			if (condition == false) {
+//				log.info(" -------------------------- PASSED -------------------------- ");
+//			} else {
+//				log.info(" -------------------------- FAILED -------------------------- ");
+//			}
 			Assert.assertFalse(condition);
 		} catch (Throwable e) {
 			pass = false;
@@ -198,7 +198,7 @@ public abstract class AbstractTest {
 			 //log.info(" -------------------------- PASSED -------------------------- ");
 		} catch (Throwable e) {
 			pass = false;
-			//log.info(" -------------------------- FAILED -------------------------- ");
+			// log.info(" -------------------------- FAILED -------------------------- ");
 			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
 			Reporter.getCurrentTestResult().setThrowable(e);
 		}

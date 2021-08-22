@@ -23,5 +23,10 @@
 	<classpathentry kind="lib" path="librariesAshot/ashot-1.5.4.jar"/>
 	<classpathentry kind="lib" path="librariesAshot/gson-2.8.5.jar"/>
 	<classpathentry kind="lib" path="librariesAshot/hamcrest-all-1.3.jar"/>
+	<classpathentry kind="lib" path="libLogs/commons-codec-1.11.jar"/>
+	<classpathentry kind="lib" path="libLogs/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="libLogs/commons-lang3-3.8.1.jar"/>
+	<classpathentry kind="lib" path="libLogs/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="libLogs/log4j-1.2.16.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

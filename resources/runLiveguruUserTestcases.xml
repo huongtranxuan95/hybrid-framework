@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="LiveGuru" parallel="false">
 
-	<!-- this parameter url config url for all <test></test> -->
+	<listeners>
+		<listener class-name="commons.MethodListener"/>
+	</listeners>
 	
+	<!-- this parameter url config url for all <test></test> -->
 	<parameter name="url" value="http://live.demoguru99.com/" />
-
+	
 	<test name="Run On Firefox">
 		<parameter name="browser" value="firefox" />
 		<!-- <parameter name = "url" value = "http://live.demoguru99.com/"/> this 
@@ -12,16 +15,16 @@
 
 		<classes>
 			<class
-				name="come.liveguru.user.Level_14_Address_Book_Displayed_UnDisplayed" />
+				name="come.liveguru.user.Level_15_Address_Book_Assert_And_Verify" />
 
 		</classes>
 	</test>
 
-	<test name="Run On Chrome">
+	<!-- <test name="Run On Chrome">
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class
-				name="come.liveguru.user.Level_14_Address_Book_Displayed_UnDisplayed" />
+				name="come.liveguru.user.Level_15_Address_Book_Assert_And_Verify" />
 		</classes>
 	</test>
 
@@ -29,10 +32,10 @@
 		<parameter name="browser" value="edge" />
 		<classes>
 			<class
-				name="come.liveguru.user.Level_14_Address_Book_Displayed_UnDisplayed" />
+				name="come.liveguru.user.Level_15_Address_Book_Assert_And_Verify" />
 		</classes>
 	</test>
-<!--  -->
+
 
 	<test name="Run On Coc Coc">
 		<parameter name="browser" value="coccoc" />
@@ -40,7 +43,7 @@
 			/>
 		<classes>
 			<class
-				name="come.liveguru.user.Level_14_Address_Book_Displayed_UnDisplayed" />
+				name="come.liveguru.user.Level_15_Address_Book_Assert_And_Verify" />
 		</classes>
-	</test>
+	</test> -->
 </suite> 
